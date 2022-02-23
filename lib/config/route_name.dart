@@ -22,7 +22,7 @@ class RouteName {
   static final String ProductPersonalTakafulinkFalahSaving = '/ProductPersonalTakafulinkFalahSaving';
   static final String ProductPersonalTakafulAlKhairatPlus = '/ProductPersonalTakafulAlKhairatPlus';
   static final String ProductPersonalTakafulKecelakaanDiriIndividu = '/ProductPersonalTakafulKecelakaanDiriIndividu';
-  
+  static final String ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia = '/ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia';
 
   static final String ProductKorporatTakafulAlKhairatKumpulan = '/ProductKorporatTakafulAlKhairatKumpulan';
   static final String ProductKorporatTakafulMedicareGold = '/ProductKorporatTakafulMedicareGold';
@@ -46,6 +46,8 @@ class RouteName {
   static final String BookNowPageSalam = '/BookNowPageSalam';
   static final String BookNowPageTakafulAlKhairatPlus = '/BookNowPageTakafulAlKhairatPlus';
   static final String BookNowPageTakafulKecelakaanDiriIndividu = '/BookNowPageTakafulKecelakaanDiriIndividu';
+  static final String BookNowPageProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia = '/BookNowPageProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia';
+  
   
 
   static final String BookNowPageAlKhairatKumpulan = '/BookNowPageAlKhairatKumpulan';

@@ -299,6 +299,8 @@ class ProductPersonal extends StatelessWidget {
                         nameShalat: 'Takaful Kecelakaan Diri Individu',
                       ),
                     ),
+                    
+                    
                   ],
                 ),
               ],

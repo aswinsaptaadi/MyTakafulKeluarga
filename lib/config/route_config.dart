@@ -10,6 +10,7 @@ import 'package:mytakafulkeluarga/ui/pages/home/sign_up_page.dart';
 import 'package:mytakafulkeluarga/ui/pages/kalender/kalenderimage.dart';
 import 'package:mytakafulkeluarga/ui/pages/kalender/kalenderpuasa.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/book_now.dart';
+import 'package:mytakafulkeluarga/ui/pages/product/book_now_ProductPersonal_takaful_keluarga_asuransi_jiwa_syariah_hijrah_cendekia.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/book_now_asuransi_jamaah_haji_tahun_2018.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/book_now_fulmedicare_gold.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/book_now_takaful_al_khairat_kumpulan.dart';
@@ -28,6 +29,7 @@ import 'package:mytakafulkeluarga/ui/pages/product/product_bancassurace_takafulp
 import 'package:mytakafulkeluarga/ui/pages/product/product_bancassurance.dart';
 // import 'package:mytakafulkeluarga/ui/pages/product/product_korporat.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/product_personal.dart';
+import 'package:mytakafulkeluarga/ui/pages/product/product_personal_ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/product_personal_asuransijamaahhaji.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/product_personal_takafulalkhairatkumpulan.dart';
 import 'package:mytakafulkeluarga/ui/pages/product/product_personal_takafulalkhairatplus.dart';
@@ -77,6 +79,8 @@ class RouteConfig {
     RouteName.ProductPersonalTakafulinkFalahSaving: (context) => ProductPersonalTakafulinkFalahSaving(),
     RouteName.ProductPersonalTakafulAlKhairatPlus: (context) => ProductPersonalTakafulAlKhairatPlus(),
     RouteName.ProductPersonalTakafulKecelakaanDiriIndividu: (context) => ProductPersonalTakafulKecelakaanDiriIndividu(),
+    RouteName.ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia: (context) => ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia(),
+    
 
     
     
@@ -104,7 +108,9 @@ class RouteConfig {
     RouteName.BookNowPageSalamZiarahBaitullah: (context) => BookNowPageSalamZiarahBaitullah(), 
     RouteName.BookNowPageSalam: (context) => BookNowPageSalam(), 
     RouteName.BookNowPageTakafulAlKhairatPlus: (context) => BookNowPageTakafulAlKhairatPlus(), 
-    RouteName.BookNowPageTakafulKecelakaanDiriIndividu: (context) => BookNowPageTakafulKecelakaanDiriIndividu(), 
+    RouteName.BookNowPageTakafulKecelakaanDiriIndividu: (context) => BookNowPageTakafulKecelakaanDiriIndividu(),
+    RouteName.BookNowPageProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia: (context) => BookNowPageProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia(),
+     
 
     RouteName.BookNowPageSalam: (context) => BookNowPageSalam(), 
 

@@ -56,6 +56,7 @@ dependencies:
   image:
   path_provider: ^1.6.28
   shared_preferences: ^0.5.12+4
+  flutter_carousel_slider: ^1.0.6
   
 
 dev_dependencies:

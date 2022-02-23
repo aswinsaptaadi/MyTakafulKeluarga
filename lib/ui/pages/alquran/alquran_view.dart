@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mytakafulkeluarga/bloc/b_alquran/alquran_bloc.dart';
@@ -23,6 +24,23 @@ class _AlQuranViewState extends State<AlQuranView> {
 
   // Bloc
   AlQuranBloc _alQuranBloc;
+  String namaSurah = 'Tanda bacaan terkahir';
+  String namaSurahAsli = 'Tanda bacaan terkahir';
+  String ayatSurah = '';
+
+  Future<void> getPreference() async {
+    final jembatan = await SharedPreferences.getInstance();
+
+    if (jembatan.containsKey('myData')) {
+      final myData =
+          json.decode(jembatan.getString('myData')) as Map<String, dynamic>;
+
+      namaSurah = myData["namaSurah"] ?? "Tidak ada tanda bacaan terkahir";
+      namaSurahAsli = myData["namaSurahAsli"] ?? "Kosong";
+      ayatSurah = myData["ayatSurah"] ?? "0";
+    }
+    setState(() {});
+  }
 
   // Future<void> getPreference() async {
   //   final jembatan = await SharedPreferences.getInstance();
@@ -31,11 +49,9 @@ class _AlQuranViewState extends State<AlQuranView> {
   //     final myData =
   //         json.decode(jembatan.getString('myData')) as Map<String, dynamic>;
 
-  //     //  isBook = myData["isBook"] == "true" ? true : false;
-  //     String nameSurah = myData["nameSurah"];
-  //     final ayatSurah = myData["ayatSurah"];
+  //     namaSurah = myData["namaSurah"] ?? "Tidak ada bacaan terakhir";
   //   }
-  //   // setState(() {});
+  //   setState(() {});
   // }
 
   @override
@@ -53,6 +69,7 @@ class _AlQuranViewState extends State<AlQuranView> {
 
   @override
   Widget build(BuildContext context) {
+    print("Build");
     return RelativeBuilder(
       builder: (context, height, width, sy, sx) {
         return CustomePage(
@@ -183,7 +200,7 @@ class _AlQuranViewState extends State<AlQuranView> {
                             height: sy(84),
                             width: double.infinity,
                             padding: EdgeInsets.only(
-                              left: 20,
+                              left: 5,
                               right: 20,
                             ),
                             decoration: BoxDecoration(
@@ -217,7 +234,7 @@ class _AlQuranViewState extends State<AlQuranView> {
                                         color: orangeColor,
                                       ),
                                       SizedBox(
-                                        width: sy(8),
+                                        width: sy(3),
                                       ),
                                       Column(
                                         crossAxisAlignment:
@@ -234,14 +251,16 @@ class _AlQuranViewState extends State<AlQuranView> {
                                               color: blackColor1,
                                             ),
                                           ),
-                                          Text(
-                                            'Al-Qamar Ayat 28',
+                                         FutureBuilder(
+                                           future: getPreference(),
+                                           builder: (context, _) => Text(
+                                             namaSurah,
                                             style: googlePoppinsMedium.copyWith(
                                               fontSize: 14,
                                               letterSpacing: 0.3,
                                               color: blackColor1,
                                             ),
-                                          ),
+                                          ),) 
                                         ],
                                       ),
                                     ],
@@ -261,7 +280,16 @@ class _AlQuranViewState extends State<AlQuranView> {
                                       ),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                    context,
+                                    RouteName.detailSurah,
+                                    arguments: SurahArguments(
+                                      idSurah: ayatSurah,
+                                      nameSurah: namaSurahAsli,
+                                    ),
+                                  );
+                                  },
                                   child: Text(
                                     'Lanjut Baca',
                                   ),

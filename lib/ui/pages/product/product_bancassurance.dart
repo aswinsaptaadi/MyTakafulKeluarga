@@ -226,6 +226,14 @@ class ProductTakafulBancassurance extends StatelessWidget {
                         nameShalat: 'Takaful Pembiayaan',  
                       ),
                     ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, RouteName.ProductPersonalTakafulKeluargaAsuransiJiwaSyariahHijrahCendekia);
+                      },
+                      child: buildTimeShalat(
+                        nameShalat: 'Takaful Jiwa Syariah Hijrah Cendekia',
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -267,7 +275,7 @@ class ProductTakafulBancassurance extends StatelessWidget {
               Text(
                 nameShalat,
                 style: googlePoppinsMedium.copyWith(
-                  fontSize: 16,
+                  fontSize: 14,
                   letterSpacing: 0.3,
                   color: primaryColor,
                 ),

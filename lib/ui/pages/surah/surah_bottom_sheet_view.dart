@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SurahBottomSheetView extends StatefulWidget {
   final String nameSurah;
+  final String ayatSurahAsli;
   final String ayatSurah;
   final int indexAudio;
   final String urlAudio;
@@ -19,6 +21,7 @@ class SurahBottomSheetView extends StatefulWidget {
   const SurahBottomSheetView({
     Key key,
     this.nameSurah,
+    this.ayatSurahAsli,
     this.ayatSurah,
     this.indexAudio,
     this.urlAudio,
@@ -34,11 +37,21 @@ class _SurahBottomSheetViewState extends State<SurahBottomSheetView> {
       AudioPlayer(); //VARIABLE YANG AKAN MENG-HANDLE AUDIO
 
   bool isBook = false;
+  String namaSurahAsli = '';
+  String namaSurah = '';
+  String ayatSurah = '';
 
   void changeBook() {
     setState(() {
       isBook = !isBook;
     });
+  }
+
+  void fnamaSurah() {
+    namaSurah = '${widget.nameSurah} Ayat ${widget.ayatSurahAsli}';
+    namaSurahAsli = widget.nameSurah; 
+    ayatSurah = widget.ayatSurah;
+    setPreference();
   }
 
   // bool
@@ -47,12 +60,31 @@ class _SurahBottomSheetViewState extends State<SurahBottomSheetView> {
   void setPreference() async {
     final jembatan = await SharedPreferences.getInstance();
 
+    if (jembatan.containsKey('myData')) {
+      jembatan.clear();
+    }
+
     final myData = json.encode({
-      'nameSurah': widget.nameSurah,
-      'ayatSurah': widget.ayatSurah,
+      'namaSurah': namaSurah,
+      'namaSurahAsli': namaSurahAsli,
+      'ayatSurah' : ayatSurah,
     });
 
     jembatan.setString('myData', myData);
+    setState(() {});
+  }
+
+  Future<void> getPreference() async {
+    final jembatan = await SharedPreferences.getInstance();
+
+    if (jembatan.containsKey('myData')) {
+      final myData =
+          json.decode(jembatan.getString('myData')) as Map<String, dynamic>;
+
+      namaSurah = myData["namaSurah"] ?? "Tidak ada tanda bacaan terkahir";
+      namaSurahAsli = myData["namaSurahAsli"] ?? "Kosong";
+      ayatSurah = myData["ayatSurah"] ?? "0";
+    }
   }
 
   @override
@@ -91,7 +123,7 @@ class _SurahBottomSheetViewState extends State<SurahBottomSheetView> {
                   bottom: 24,
                 ),
                 child: Text(
-                  '${widget.nameSurah} : ${widget.ayatSurah}',
+                  '${widget.nameSurah} : ${widget.ayatSurahAsli}',
                   style: googlePoppinsMedium.copyWith(
                     fontSize: 20,
                     color: blackColor1,
@@ -127,7 +159,7 @@ class _SurahBottomSheetViewState extends State<SurahBottomSheetView> {
                         if (_currentSelectedAyat ==
                             int.parse(widget.ayatSurah)) {
                           print('---------------------------');
-                          print(int.parse(widget.ayatSurah));
+                          print(int.parse(widget.ayatSurahAsli));
                           print('---------------------------');
                           switch (int.parse(widget.ayatSurah)) {
                             case 1:
@@ -635,33 +667,39 @@ class _SurahBottomSheetViewState extends State<SurahBottomSheetView> {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                   ),
-                  // buttonFunctionSurah(
-                  //   icon: Icon(
-                  //     Icons.favorite_border_outlined,
-                  //     size: sy(24),
-                  //     color: Color(0xFF595959),
+                  // FutureBuilder(
+                  //   future: getPreference(),
+                  //   builder: (context, _) => buttonFunctionSurah(
+                  //     icon: Icon(
+                  //       Icons.favorite_border_outlined,
+                  //       size: sy(24),
+                  //       color: Color(0xFF595959),
+                  //     ),
+                  //     nameFunction: '${namaSurah} : ${namaSurahAsli} : ${ayatSurah}',
+                  //     onTap: () {},
                   //   ),
-                  //   nameFunction: 'Tambahkan ke bookmark',
-                  //   onTap: () {},
                   // ),
                   GestureDetector(
                     onTap: () {
+                      fnamaSurah();
                       setState(() {
                         isBook = !isBook;
                       });
                     },
                     child: buttonFunctionSurah(
-                      icon: isBook ? Icon(
-                        Icons.bookmark_border,
-                        size: sy(24),
-                        color: Color(0xFFFAC915),
-                      ) : Icon(
-                        Icons.bookmark_border,
-                        size: sy(24),
-                        color: Color(0xFF595959),
-                      ),
+                      icon: isBook
+                          ? Icon(
+                              Icons.bookmark_border,
+                              size: sy(24),
+                              color: Color(0xFFFAC915),
+                            )
+                          : Icon(
+                              Icons.bookmark_border,
+                              size: sy(24),
+                              color: Color(0xFF595959),
+                            ),
                       nameFunction: 'Tandai terakhir dibaca',
-                      onTap: () {},
+                      onTap: fnamaSurah,
                     ),
                   ),
                 ],

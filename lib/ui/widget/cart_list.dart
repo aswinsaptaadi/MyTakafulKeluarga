@@ -23,7 +23,7 @@ class CartList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 315,
-      height: 270,
+      height: 275,
       decoration: BoxDecoration(
         color: Color(0xFFEDF3F7),
         borderRadius: BorderRadius.circular(20),
@@ -55,7 +55,7 @@ class CartList extends StatelessWidget {
                   food,
                   style: GoogleFonts.poppins(
                     color: Color(0xff191919),
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,

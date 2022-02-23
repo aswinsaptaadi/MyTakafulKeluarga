@@ -211,13 +211,13 @@ class _SurahDetailViewState extends State<SurahDetailView> {
                                           builder: (context) =>
                                               SurahBottomSheetView(
                                             nameSurah: widget.nameSurah,
-                                            // ayatSurah: state
-                                            //     .modelDetailSurah
-                                            //     .data
-                                            //     .verses[index]
-                                            //     .number
-                                            //     .inSurah
-                                            //     .toString(),
+                                            ayatSurahAsli: state
+                                                .modelDetailSurah
+                                                .data
+                                                .verses[index]
+                                                .number
+                                                .inSurah
+                                                .toString(),
                                             ayatSurah:  widget.idSurah,
                                             indexAudio: index,
                                             urlAudio: state

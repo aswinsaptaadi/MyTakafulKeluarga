@@ -21,11 +21,31 @@ class ApiService implements Repository {
       response = await dio.get(
         '$baseUrlAlQuran/surah',
       );
-      return ModelListAlQuran.fromJson(
-        json.decode(
-        response.data,
-        ),
-      );
+      var models = new ModelListAlQuran();
+      if(response.statusCode == 200){
+        try{
+          models = ModelListAlQuran.fromJson(
+            response.data,
+          );
+        }catch(error){
+          try{
+            models = ModelListAlQuran.fromJson(
+            json.decode(
+              response.data,
+              ),
+            );
+          }catch(error, stacktrace){
+            throw showException(error, stacktrace);
+          }
+          
+        }
+      }
+      return models;
+      // return ModelListAlQuran.fromJson(
+      //   // json.decode(
+      //   response.data,
+      //   // ),
+      // );
     } on DioError catch (e) {
       throw e.getErrorMessage();
     } catch (error, stacktrace) {
@@ -41,39 +61,59 @@ class ApiService implements Repository {
       response = await dio.get(
         '$baseUrlAlQuran/surah/$idSurah',
       );
-      if (idSurah == "2") {
-        print("IDSURAH 2");
-        return ModelDetailSurah.fromJson(
-          json.decode(
+      var models = new ModelDetailSurah();
+      if(response.statusCode == 200){
+        try{
+          models = ModelDetailSurah.fromJson(
             response.data,
-          ),
-        );
-      } else if (idSurah == "1") {
-        print("IDSURAH 1");
-        return ModelDetailSurah.fromJson(
-          json.decode(
-          response.data,
-          ),
-        );
-      } else if (idSurah == "36") {
-        print("IDSURAH 36");
-        return ModelDetailSurah.fromJson(
-          json.decode(
-          response.data,
-          ),
-        );
+          );
+        }catch(error){
+          try{
+            models = ModelDetailSurah.fromJson(
+            json.decode(
+              response.data,
+              ),
+            );
+          }catch(error, stacktrace){
+            throw showException(error, stacktrace);
+          }
+          
+        }
       }
+      return models;
+      // if (idSurah == "2") {
+      //   print("IDSURAH 2");
+      //   return ModelDetailSurah.fromJson(
+      //     // json.decode(
+      //       response.data,
+      //     // ),
+      //   );
+      // } else if (idSurah == "1") {
+      //   print("IDSURAH 1");
+      //   return ModelDetailSurah.fromJson(
+      //     // json.decode(
+      //     response.data,
+      //     // ),
+      //   );
+      // } else if (idSurah == "36") {
+      //   print("IDSURAH 36");
+      //   return ModelDetailSurah.fromJson(
+      //     json.decode(
+      //     response.data,
+      //     ),
+      //   );
+      // }
       
-      else {
-        // print("INI RESPONSE");
-        // print(response.data);
-        print("IDSURAH BUKAN 2");
-        return ModelDetailSurah.fromJson(
-          // json.decode(
-          response.data,
-          // ),
-        );
-      }
+      // else {
+      //   // print("INI RESPONSE");
+      //   // print(response.data);
+      //   print("IDSURAH BUKAN 2");
+      //   return ModelDetailSurah.fromJson(
+      //     // json.decode(
+      //     response.data,
+      //     // ),
+      //   );
+      // }
     } on DioError catch (e) {
       throw e.getErrorMessage();
     } catch (error, stacktrace) {
